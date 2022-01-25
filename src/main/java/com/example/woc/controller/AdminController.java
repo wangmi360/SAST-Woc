@@ -1,9 +1,12 @@
 package com.example.woc.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.woc.entity.Account;
+import com.example.woc.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 /**
  * @author: 風楪fy
@@ -15,26 +18,26 @@ public class AdminController {
 
     //请仿照 User 补充 Admin 的三层架构并完成接口
 
+    @Autowired
+    UserService userService;
+
     /**
      * 获取当前的账户总数
+     *
      * @return
      */
     @GetMapping("/getAmount")
-    public Integer getAmountOfAccounts(){
-
-        //todo
-
-        return null;
+    public Integer getAmountOfAccounts() {
+        return userService.getUserAmount();
     }
 
     /**
      * 根据用户名删除账户
-     * @param username
+     *
+     * @param
      */
     @PutMapping("deleteAccount")
-    public void deleteAccount(String username){
-
-        //todo
-
+    public void deleteAccount(@RequestBody Account account) {
+        userService.deleteAccount(account.getUsername());
     }
 }

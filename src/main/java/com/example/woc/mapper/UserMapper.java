@@ -14,4 +14,16 @@ import org.springframework.stereotype.Repository;
 public interface UserMapper {
     //示例
     void test(@Param("value") String test);
+
+    //
+    Integer getAmountOfAccounts();
+
+    void deleteAccount(@Param("username") String username);
+
+    void insertAccount(@Param("username") String username,
+                       @Param("password") String password,
+                       @Param("email") String email);
+
+    Integer isAccountMatch(@Param("username") String username,
+                           @Param("password") String password);
 }
